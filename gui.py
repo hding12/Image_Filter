@@ -106,8 +106,6 @@ class ImageFilter(tk.Frame):
         button_return_home_extract.place(x='20', y='230', anchor='nw')
 
     def create_search_window(self):
-        self.check_state_face = 0
-        self.check_state_text = 0
         self.search_frame.place(x=0, y=0, anchor='nw')
         self.master.title('Search Images')
 
@@ -164,7 +162,7 @@ class ImageFilter(tk.Frame):
         checkbutton_text['variable'] = self.check_state_text
         checkbutton_text['onvalue'] = 1
         checkbutton_text['offvalue'] = 0
-        checkbutton_text['command'] = lambda: self.filter_selection_text
+        checkbutton_text['command'] = self.filter_selection_text
         checkbutton_text.place(x='0', y='95', anchor='nw')
 
         self.result_label['bg'] = 'white'
@@ -274,6 +272,7 @@ class ImageFilter(tk.Frame):
             self.face_entry['state'] = 'disabled'
 
     def filter_selection_text(self):
+
         if self.check_state_text.get() == 1:
             self.text_entry['state'] = 'normal'
         else:
@@ -287,6 +286,8 @@ class ImageFilter(tk.Frame):
             self.search_frame.place_forget()
             self.error_label_search.place_forget()
             self.result_label['text'] = ''
+            self.check_state_face = 0
+            self.check_state_text = 0
 
     def extract_error(self, error):
         self.error_label_extract['text'] = error
